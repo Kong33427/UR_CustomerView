@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\registerController;
+use App\Http\Controllers\loginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +27,7 @@ Route::get('/register', function () {
 Route::get('/forget_pass', function () {
     return view('forget_pass');
 });
+
+Route::post('/login_request', [loginController::class,'login']);
+Route::post('/login_form', [loginController::class,'login']);
+Route::post('/register_form', [registerController::class,'register']);
