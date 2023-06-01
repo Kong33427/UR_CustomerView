@@ -50,3 +50,4 @@ class registerController extends Controller
         }
     }
 }
+//HRIS_SYNC_USER_INFO

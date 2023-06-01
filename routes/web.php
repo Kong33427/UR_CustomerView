@@ -16,7 +16,7 @@ use App\Http\Controllers\loginController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
 Route::get('/login', function () {
     return view('login');
@@ -27,7 +27,18 @@ Route::get('/register', function () {
 Route::get('/forget_pass', function () {
     return view('forget_pass');
 });
+Route::get('/main_user', function () {
+    return view('main_user');
+});
+Route::get('/main_admin', function () {
+    return view('main_admin');
+});
+Route::get('/cs_tracking', function () {
+    return view('cs_tracking');
+});
+Route::get('/cs_upload', function () {
+    return view('cs_upload');
+});
 
-Route::post('/login_request', [loginController::class,'login']);
 Route::post('/login_form', [loginController::class,'login']);
 Route::post('/register_form', [registerController::class,'register']);

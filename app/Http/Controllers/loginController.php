@@ -8,11 +8,12 @@ class loginController extends Controller
 {
 
     public function login(Request $request){
+        echo '123';
         // print_r($request->input('username'));
         // print_r($request->input('password'));
         $username=$request->input('username');
         $password=$request->input('password');
-        $users = DB::table('users')
+        $users = DB::table('WEBAPP2_USERS')
             ->select('username', 'password','is_admin')
             ->where('username', '=', $username)
             ->where('password', '=', $password)
@@ -24,13 +25,13 @@ class loginController extends Controller
                 return redirect('/login')->with('message',$message);
             }
             else{
-                if($array['is_admin'] == 1){
-                    return redirect('/main_admin');
-                    echo 'admin';
+                // if($array['is_admin'] == 1){
+                //     return redirect('/main_admin');
+                //     echo 'admin';
 
-                }else{
-                    echo 'user1';
-                }
+                // }else{
+                //     echo 'user1';
+                // }
                 return redirect('/main_user');
         }
         // $array = (array) $users;

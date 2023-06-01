@@ -53,7 +53,11 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-block">Register</button>
-                                <hr>
+                                <!-- <strong style="color:red;" ><?php echo session('message');?></strong>  -->
+                                
+                                <div class="alert alert-danger" role="alert">
+                                <?php echo session('message');?>
+                                </div>
                             </form>
                             <hr>
                             <div class="text-center">
