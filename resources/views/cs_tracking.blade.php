@@ -48,7 +48,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="/cs_tracking.html" class="brand-link">
+      <a href="../forms_cs/cs_tracking.html" class="brand-link">
         <img src="../../dist/img/AdminLTELogo1.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
           style="opacity: .8">
         <span class="brand-text font-weight-light">IT Cutomer Service</span>
@@ -76,7 +76,7 @@
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item menu-open">
-              <a href="#" class="nav-link">
+              <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-table"></i>
                 <p>
                   User
@@ -85,20 +85,20 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="../forms_cs/cs_dashboard.html" class="nav-link">
+                  <a href="main_user" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Dashboard</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/cs_tracking" class="nav-link">
+                  <a href="../forms_cs/cs_tracking.html" class="nav-link active">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Tracking</p>
                   </a>
                 </li>
               </ul>
             </li>
-            <a href="/cs_upload" class="nav-link active">
+            <a href="/cs_upload" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>upload</p>
                   </a>
@@ -202,11 +202,59 @@
 
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Upload file</h3>
+                  <h3 class="card-title">DataTable with default features</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
 
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Reference No.</th>
+                        <th>Name</th>
+                        <th>Completed</th>
+                        <th>Status</th>
+                        <th>Due Date</th>
+                        <th>Team</th>
+                        <th>BU</th>
+                        <th>Type</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($data as $item)
+  <tr>
+    <td>{{ $item->task_id }}</td>
+    <td>{{ $item->task_name }}</td>
+    <td>{{ $item->completion }}</td>
+    <td ><div <?php 
+    if ($item->status =='COMPLETE'){echo 'class="badge badge-success"';}
+    elseif ($item->status =='TO DO') {echo 'class="badge badge-secondary"';}
+    elseif ($item->status =='DELAY') {echo 'class="badge badge-warning"';}
+    elseif ($item->status =='IN PROGRESS') {echo 'class="badge badge-info"';}
+    ?>
+    >
+      {{ $item->status }}</div></td>
+    <td>{{ $item->end_date }}</td>
+    <td>{{ $item->team }}</td>
+    <td>{{ $item->bu }}</td>
+    <td>{{ $item->type }}</td>
+  </tr>
+@endforeach
+                    </tbody>
+
+                    <tfoot>
+                      <tr>
+                        <th>Reference No.</th>
+                        <th>Name</th>
+                        <th>Completed</th>
+                        <th>Status</th>
+                        <th>Due Date</th>
+                        <th>Team</th>
+                        <th>BU</th>
+                        <th>Type</th>
+                      </tr>
+                    </tfoot>
+                  </table>
 
 
                 </div>

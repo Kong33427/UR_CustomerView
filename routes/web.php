@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\registerController;
 use App\Http\Controllers\loginController;
-
+use App\Http\Controllers\ImportController;
+use App\Http\Controllers\TrackingController;
+use App\Http\Controllers\MainUserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,18 +29,17 @@ Route::get('/register', function () {
 Route::get('/forget_pass', function () {
     return view('forget_pass');
 });
-Route::get('/main_user', function () {
-    return view('main_user');
-});
+Route::get('/main_user', [MainUserController::class,'index']);
 Route::get('/main_admin', function () {
     return view('main_admin');
 });
-Route::get('/cs_tracking', function () {
-    return view('cs_tracking');
-});
+Route::get('/cs_tracking',[TrackingController::class,'index']
+);
 Route::get('/cs_upload', function () {
     return view('cs_upload');
 });
 
 Route::post('/login_form', [loginController::class,'login']);
 Route::post('/register_form', [registerController::class,'register']);
+Route::get('/users/import', [ImportController::class,'show']);
+Route::post('/users/import',[ImportController::class,'store']);

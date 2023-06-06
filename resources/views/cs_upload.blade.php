@@ -48,7 +48,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="../forms_cs/cs_tracking.html" class="brand-link">
+      <a href="/cs_tracking.html" class="brand-link">
         <img src="../../dist/img/AdminLTELogo1.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
           style="opacity: .8">
         <span class="brand-text font-weight-light">IT Cutomer Service</span>
@@ -76,7 +76,7 @@
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item menu-open">
-              <a href="#" class="nav-link active">
+              <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                 <p>
                   User
@@ -85,25 +85,20 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="../forms_cs/cs_dashboard.html" class="nav-link">
+                  <a href="/main_user" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Dashboard</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="../forms_cs/cs_tracking.html" class="nav-link active">
+                  <a href="/cs_tracking" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Tracking</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="/cs_upload" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Upload</p>
-                  </a>
               </ul>
             </li>
-            <a href="/cs_upload" class="nav-link">
+            <a href="/cs_upload" class="nav-link active">
                     <i class="far fa-circle nav-icon"></i>
                     <p>upload</p>
                   </a>
@@ -207,140 +202,70 @@
 
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">DataTable with default features</h3>
+                  <h3 class="card-title">Upload file</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
+                @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
-                  <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th>Reference No.</th>
-                        <th>Name</th>
-                        <th>Completed</th>
-                        <th>Status</th>
-                        <th>Due Date</th>
-                        <th>Team</th>
-                        <th>BU</th>
-                        <th>Type</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><a href="../forms_cs/cs_detail.html">PJ202303049</a></td>
-                        <td>FG Scan Receive / Issue by Mobile Scanner</th>
-                        <td>80%</td>
-                        <td><span class="badge badge-warning">DELAY</span></td>
-                        <td>3-Jan-23</td>
-                        <td>GARMENT</td>
-                        <td>NYG</td>
-                        <td>1. Main Project</td>
-                      </tr>
-                      <tr>
-                        <td><a href="../forms_cs/cs_detail.html">PJ202303048</a></td>
-                        <td>Andon Phase V: Improvement for Friendly User</th>
-                        <td>90%</td>
-                        <td><span class="badge badge-warning">DELAY</span></td>
-                        <td>18-Apr-23</td>
-                        <td>GARMENT</td>
-                        <td>NYG</td>
-                        <td>1. Main Project</td>
-                      </tr>
-                      <tr>
-                        <td><a href="../forms_cs/cs_detail.html">PJ202303050</a></td>
-                        <td>Printing Process System</th>
-                        <td>60%</td>
-                        <td><span class="badge badge-warning">DELAY</span></td>
-                        <td>20-Apr-23</td>
-                        <td>GARMENT</td>
-                        <td>NYG</td>
-                        <td>1. Main Project</td>
-                      </tr>
-                      <tr>
-                        <td><a href="../forms_cs/cs_detail.html">PJ202303051</a></td>
-                        <td>Machine Control for Maintenance (Non-Sewing Machine)</th>
-                        <td>81%</td>
-                        <td><span class="badge badge-warning">DELAY</span></td>
-                        <td>3-May-23</td>
-                        <td>GARMENT</td>
-                        <td>NYG</td>
-                        <td>1. Main Project</td>
-                      </tr>
-                      <tr>
-                        <td><a href="../forms_cs/cs_detail.html">PJ202303052</a></td>
-                        <td>Sub-Process Send/ Receive by Mobile Scanner</th>
-                        <td>0%</td>
-                        <td><span class="badge badge-secondary">TO DO</span></td>
-                        <td>30-Jun-23</td>
-                        <td>GARMENT</td>
-                        <td>NYG</td>
-                        <td>1. Main Project</td>
-                      </tr>
-                      <tr>
-                        <td><a href="../forms_cs/cs_detail.html">PJ202303053</a></td>
-                        <td>UAAI/Lazada/Shopee Interface to Monitor</th>
-                        <td>100%</td>
-                        <td><span class="badge badge-success">COMPLETE</span></td>
-                        <td>28-Feb-23</td>
-                        <td>GARMENT</td>
-                        <td>RW</td>
-                        <td>1. Main Project</td>
-                      </tr>
-                      <tr>
-                        <td><a href="../forms_cs/cs_detail.html">PJ202303054</a></td>
-                        <td>NYG Combine Cut Plan Improvement - Group by GM</th>
-                        <td>10%</td>
-                        <td><span class="badge badge-info">IN PROGRESS</span></td>
-                        <td>30-Jun-23</td>
-                        <td>GARMENT</td>
-                        <td>NYG</td>
-                        <td>1. Main Project</td>
-                      </tr>
-                      <tr>
-                        <td><a href="../forms_cs/cs_detail.html">PJ202303073</a></td>
-                        <td>Confirm New RDD ( Request Delivery Date)</th>
-                        <td>90%</td>
-                        <td><span class="badge badge-warning">DELAY</span></td>
-                        <td>18-Apr-23</td>
-                        <td>GARMENT</td>
-                        <td>NYG</td>
-                        <td>1. Main Project</td>
-                      </tr>
-                      <tr>
-                        <td><a href="../forms_cs/cs_detail.html">UR202303025</a></td>
-                        <td>ระบบการ Auto interface FG from NYG to GRW</th>
-                        <td>100%</td>
-                        <td><span class="badge badge-success">COMPLETE</span></td>
-                        <td>20-Jan-23</td>
-                        <td>GARMENT</td>
-                        <td>GRW</td>
-                        <td>3. UR</td>
-                      </tr>
-                      <tr>
-                        <td><a href="../forms_cs/cs_detail.html">UR202304003</a></td>
-                        <td>Calculateระบบ Payroll TRM</th>
-                        <td>0%</td>
-                        <td><span class="badge badge-secondary">TO DO</span></td>
-                        <td>30-May-23</td>
-                        <td>GARMENT</td>
-                        <td>TRM</td>
-                        <td>3. UR</td>
-                      </tr>
+                    @if (session('message'))
+                    <div class="alert alert-danger alert-dismissible">
+<button type="button" class="close" style= "font-weight: bold; padding-top: 5px;" data-dismiss="alert" aria-hidden="true">×</button>
+<h5><i class="icon fas fa-ban" style="padding-top: 5px;"></i> <?php echo session('message');?> </h5>
+</div>
 
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>Reference No.</th>
-                        <th>Name</th>
-                        <th>Completed</th>
-                        <th>Status</th>
-                        <th>Due Date</th>
-                        <th>Team</th>
-                        <th>BU</th>
-                        <th>Type</th>
-                      </tr>
-                    </tfoot>
-                  </table>
+                    @endif
+
+
+                    @if (isset($errors) && $errors->any())
+                        <div class="alert alert-danger">
+                            @foreach ($errors->all() as $error)
+                                {{ $error }}
+                            @endforeach
+                        </div>
+                    @endif
+
+                    @if (session()->has('failures'))
+
+                        <table class="table table-danger">
+                            <tr>
+                                <th>Row</th>
+                                <th>Attribute</th>
+                                <th>Errors</th>
+                                <th>Value</th>
+                            </tr>
+
+                            @foreach (session()->get('failures') as $validation)
+                                <tr>
+                                    <td>{{ $validation->row() }}</td>
+                                    <td>{{ $validation->attribute() }}</td>
+                                    <td>
+                                        <ul>
+                                            @foreach ($validation->errors() as $e)
+                                                <li>{{ $e }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        {{ $validation->values()[$validation->attribute()] }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </table>
+
+                    @endif
+                <form action="/users/import" method="post" enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="form-group" style="background-color:white;">
+                            <input type="file" name="file" ></input>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Import</button>
+                  </form>
 
 
                 </div>
