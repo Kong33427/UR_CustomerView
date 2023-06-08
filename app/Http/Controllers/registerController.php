@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Symfony\Component\Console\Input\Input;
@@ -29,10 +29,11 @@ class registerController extends Controller
                 $array = (array) $users;
                 // var_dump($users);
             if(!$users){
+                $hashedPassword = Hash::make($password);
                 $user=array(
                     'emp_code' => $emp_code,
                     'username' => $emp_code,
-                    'password' => $password
+                    'password' => $hashedPassword
                 );
                 DB::table('WEBAPP2_USERS') -> insert($user);
                 // $user= new User;

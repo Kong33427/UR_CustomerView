@@ -297,10 +297,22 @@
           </div>
 
         <div class="row mb-2">
-          <div class="col-sm-6">
+          <div class="col-sm-1">
             <h1>ChartJS</h1>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-4">
+            <form id="myForm" action="/main_submit" method="POST">
+              @csrf
+              <select id="mySelect" class="custom-select" onchange="submitForm()">
+                <option>option 1</option>
+                <option>option 2</option>
+                <option>option 3</option>
+                <option>option 4</option>
+                <option>option 5</option>
+              </select>
+            </form>
+          </div>
+          <div class="col-sm-7">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">ChartJS</li>
@@ -315,10 +327,8 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-        <div class="col-md-6">
-
             <!-- DONUT CHART -->
-            <div class="card card-danger">
+            <div class="card card-danger" style="margin-right: 5px">
               <div class="card-header">
                 <h3 class="card-title">Donut Chart</h3>
 
@@ -339,7 +349,7 @@
             <!-- /.card -->
 
             <!-- PIE CHART -->
-            <div class="card card-danger">
+            <div class="card card-danger" style="padding-right: 5px">
               <div class="card-header">
                 <h3 class="card-title">Pie Chart</h3>
 
@@ -358,10 +368,6 @@
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
-
-          </div>
-          <!-- /.col (LEFT) -->
-          <div class="col-md-6">
 
 
             <!-- BAR CHART -->
@@ -387,11 +393,8 @@
             </div>
             <!-- /.card -->
 
-
-          </div>
-          <!-- /.col (RIGHT) -->
         </div>
-</dic>
+
         <!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>
@@ -421,54 +424,9 @@
 <script src="../../plugins/chart.js/Chart.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
 <!-- Page specific script -->
 <script>
   $(function () {
-    /* ChartJS
-     * -------
-     * Here we will create a few charts using ChartJS
-     */
-
-    //--------------
-    //- AREA CHART -
-    //--------------
-
-    // Get context with jQuery - using jQuery's .get() method.
-    var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-    console.log(donutChartCanvas);
-
-    var donutChartData = {
-      labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-        {
-          label               : 'Digital Goods',
-          backgroundColor     : 'rgba(60,141,188,0.9)',
-          borderColor         : 'rgba(60,141,188,0.8)',
-          pointRadius          : false,
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [28, 48, 40, 19, 86, 27, 90]
-        },
-        {
-          label               : 'Electronics',
-          backgroundColor     : 'rgba(210, 214, 222, 1)',
-          borderColor         : 'rgba(210, 214, 222, 1)',
-          pointRadius         : false,
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [65, 59, 80, 81, 56, 55, 40]
-        },
-      ]
-    }
-
-
-
     //-------------
     //- DONUT CHART -
     //-------------
@@ -485,10 +443,13 @@
                     datasets: [{
                         data: values,
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.8)',
-                            'rgba(54, 162, 235, 0.8)',
-                            'rgba(75, 192, 192, 0.8)',
-                            'rgba(255, 206, 86, 0.8)',
+                            'rgb(75, 192, 192)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 99, 132)',
+                            'rgb(255, 206, 86)',
+                            'rgb(150, 150, 150)',
+                            'rgb(0, 0, 0)',
+                            
                         ],
                         borderWidth: 1
                     }]
@@ -516,10 +477,12 @@
                     datasets: [{
                         data: values,
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.8)',
-                            'rgba(54, 162, 235, 0.8)',
-                            'rgba(75, 192, 192, 0.8)',
-                            'rgba(255, 206, 86, 0.8)',
+                          'rgb(75, 192, 192)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 99, 132)',
+                            'rgb(255, 206, 86)',
+                            'rgb(150, 150, 150)',
+                            'rgb(0, 0, 0)',
                         ],
                         borderWidth: 1
                     }]
@@ -547,10 +510,12 @@ var chart = new Chart(ctx, {
         datasets: [{
             data: values,
             backgroundColor: [
-                'rgba(255, 99, 132, 0.8)',
-                'rgba(54, 162, 235, 0.8)',
-                'rgba(75, 192, 192, 0.8)',
-                'rgba(255, 206, 86, 0.8)',
+              'rgb(75, 192, 192)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 99, 132)',
+                            'rgb(255, 206, 86)',
+                            'rgb(150, 150, 150)',
+                            'rgb(0, 0, 0)',
             ],
             borderWidth: 1
         }]

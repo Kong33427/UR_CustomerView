@@ -6,6 +6,7 @@ use App\Http\Controllers\loginController;
 use App\Http\Controllers\ImportController;
 use App\Http\Controllers\TrackingController;
 use App\Http\Controllers\MainUserController;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,12 +18,18 @@ use App\Http\Controllers\MainUserController;
 |
 */
 
+Route::get('/a', function () {
+    // echo 'asdadssa';
+    // var_dump(Auth::user());
+    var_dump(session());
+});
 Route::get('/', function () {
     return view('login');
 });
 Route::get('/login', function () {
     return view('login');
 });
+Route::post('/login', [loginController::class, 'login'])->name('login');
 Route::get('/register', function () {
     return view('register');
 });
@@ -30,6 +37,7 @@ Route::get('/forget_pass', function () {
     return view('forget_pass');
 });
 Route::get('/main_user', [MainUserController::class,'index']);
+// ->middleware('auth');
 Route::get('/main_admin', function () {
     return view('main_admin');
 });
@@ -43,3 +51,5 @@ Route::post('/login_form', [loginController::class,'login']);
 Route::post('/register_form', [registerController::class,'register']);
 Route::get('/users/import', [ImportController::class,'show']);
 Route::post('/users/import',[ImportController::class,'store']);
+Route::post('/main_submit', [MainUserController::class,'index']);
+
