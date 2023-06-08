@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Imports\UsersImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel\Days;
+use Carbon\Carbon;
 
 class ImportController extends Controller
 {
@@ -19,7 +21,9 @@ class ImportController extends Controller
             $message= 'ไม่มีไฟล์';
             return back()->with('message',$message);
         }
-        Excel::import(new UsersImport, $file);
+        $time= date('Y-m-d H:i:s');
+        echo $time;
+        Excel::import(new UsersImport($time), $file);
 
         return back()->withStatus('File Imported');
     }

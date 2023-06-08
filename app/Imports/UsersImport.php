@@ -6,8 +6,7 @@ use App\Models\Clickup;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel\Days;
-use Carbon\Carbon;
+
 
 class UsersImport implements ToModel, WithHeadingRow
 {
@@ -16,11 +15,15 @@ class UsersImport implements ToModel, WithHeadingRow
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
+    private $additionalValue;
+
+    public function __construct($additionalValue)
+    {
+        $this->additionalValue = $additionalValue;
+    }
     public function model(array $row)
     {
         // var_dump($row);
-        $time= date('Y-m-d H:i:s');
-        echo $time;
         return new Clickup([
             'TASK_ID' => $row['task_id'],
             'TASK_NAME' => $row['task_name'],
@@ -55,7 +58,7 @@ class UsersImport implements ToModel, WithHeadingRow
             'CURRENT_STATUS' => $row['current_status_text'],
             'NEXT_STATUS' => $row['next_status_text'],
             'MAN_DAY' => $row['manday_number'],
-            'CREATE_DATE'=> $time,
+            'CREATE_DATE'=> $this->additionalValue,
         ]);
     }
     public function headingRow(): int

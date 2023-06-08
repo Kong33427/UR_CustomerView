@@ -56,6 +56,7 @@ Route::post('/register_form', [registerController::class,'register']);
 Route::get('/users/import', [ImportController::class,'show']);
 Route::post('/users/import',[ImportController::class,'store']);
 Route::post('/main_submit', [MainUserController::class,'index']);
+
 Route::get('/logout', function () {
     Session::flush();
     Auth::logout();

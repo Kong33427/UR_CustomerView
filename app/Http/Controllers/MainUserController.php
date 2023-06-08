@@ -29,7 +29,6 @@ class MainUserController extends Controller
             'CANCEL' => 0,
             'HOLD' => 0,
         ];
-    
         foreach ($data as $item) {
             $status = $item->status;
             if (isset($statusCounts[$status])) {
@@ -37,6 +36,10 @@ class MainUserController extends Controller
             }
         }
     
+        $option = DB::table('CLICKUP_DATA')
+        ->select('CREATE_DATE')
+        ->distinct();
+
         // var_dump($statusCounts);
 
         return view('main_user', compact('statusCounts'));
