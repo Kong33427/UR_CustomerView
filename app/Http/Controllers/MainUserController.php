@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class MainUserController extends Controller
 {
     public function index()
-    {
+    {   
         $data = DB::table('CLICKUP_DATA as C')
         ->select('C.TASK_ID', 'C.TASK_NAME', 'C.COMPLETION', 'C.STATUS', 'C.END_DATE', 'C.TEAM', 'C.BU', 'C.TYPE')
         ->where('C.CREATE_DATE', function ($query) {

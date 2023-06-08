@@ -14,9 +14,13 @@ class User extends Authenticatable
     protected $fillable = [
         'USERNAME',
         'PASSWORD',
+        'EMP_CODE',
     ];
     protected $hidden = [
         'PASSWORD',
         // 'remember_token',
     ];
+    public $incrementing = false;
+    protected $primaryKey = 'username';
+    protected $keytype = 'string';
 }
