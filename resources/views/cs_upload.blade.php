@@ -22,27 +22,28 @@
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-      <!-- Left navbar links -->
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="../forms_cs/cs_tracking.html" class="nav-link">Home</a>
-        </li>
-      </ul>
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
+                            class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="../../index3.html" class="nav-link">Home</a>
+                </li>
+            </ul>
 
-      <!-- Right navbar links -->
-      <ul class="navbar-nav ml-auto">
-        <!-- Navbar Search -->
-
-        <!-- Messages Dropdown Menu -->
-
-        <!-- Notifications Dropdown Menu -->
-
-      </ul>
-    </nav>
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Navbar Search -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout" role="button">
+                        Logout <i class="fas fa-key"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
@@ -318,8 +319,6 @@
   <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
   <!-- AdminLTE App -->
   <script src="../../dist/js/adminlte.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="../../dist/js/demo.js"></script>
   <!-- Page specific script -->
   <script>
     $(function () {
