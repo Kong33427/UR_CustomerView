@@ -36,14 +36,20 @@ class MainUserController extends Controller
             }
         }
     
-        $option = DB::table('CLICKUP_DATA')
+        $CreateDates = DB::table('CLICKUP_DATA')
         ->select('CREATE_DATE')
-        ->distinct();
-
+        ->distinct()
+        ->get();
+        $CreateDates = $CreateDates->toArray();
         // var_dump($statusCounts);
+        // var_dump($CreateDates);
 
-        return view('main_user', compact('statusCounts'));
-
+        return view('main_user', compact('statusCounts'),compact('CreateDates'));
+    }
+    public function option(Request $request)
+    {
+        $option= $request->option;
+        var_dump($option);
 
     }
 }

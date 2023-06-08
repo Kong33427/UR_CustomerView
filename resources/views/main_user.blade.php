@@ -196,15 +196,13 @@
                             <h1>ChartJS</h1>
                         </div>
                         <div class="col-sm-4">
-                            <form id="myForm" action="/main_submit" method="POST">
+                            <form id="myForm" action="/main_user_option" method="POST">
                                 @csrf
-                                <select id="mySelect" class="custom-select" onchange="submitForm()">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                    <option>option 5</option>
-                                </select>
+                                <select id="option" class="custom-select" name="option" onchange="submitForm()">
+                                @foreach ($CreateDates as $createDate)
+                                <option>{{ $createDate->create_date }}</option>
+                                @endforeach
+                              </select>
                             </form>
                         </div>
                         <div class="col-sm-7">
@@ -325,6 +323,9 @@
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- Page specific script -->
     <script>
+          function submitForm() {
+        document.getElementById("myForm").submit();
+    }
         $(function() {
             //-------------
             //- DONUT CHART -

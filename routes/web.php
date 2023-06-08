@@ -41,6 +41,7 @@ Route::get('/forget_pass', function () {
     return view('forget_pass');
 });
 Route::get('/main_user', [MainUserController::class,'index'])->middleware('auth');
+Route::post('/main_user_option', [MainUserController::class,'option'])->middleware('auth');;
 // ->middleware('auth');
 Route::get('/main_admin', function () {
     return view('main_admin');
@@ -55,7 +56,7 @@ Route::post('/login_form', [loginController::class,'login']);
 Route::post('/register_form', [registerController::class,'register']);
 Route::get('/users/import', [ImportController::class,'show']);
 Route::post('/users/import',[ImportController::class,'store']);
-Route::post('/main_submit', [MainUserController::class,'index']);
+
 
 Route::get('/logout', function () {
     Session::flush();
