@@ -26,7 +26,19 @@ class TrackingController extends Controller
         // var_dump($data);
         $data = $data->toArray();
         // dd($data);
-        return view('cs_tracking', compact('data'));
+        $CreateDates = DB::table('CLICKUP_DATA')
+        ->select('CREATE_DATE')
+        ->distinct()
+        ->get();
+        $CreateDates = $CreateDates->toArray();
+
+        $piccits = DB::table('CLICKUP_DATA')
+        ->select('PIC_CIT')
+        ->distinct()
+        ->get();
+        $piccits = $piccits->toArray();
+        // var_dump($piccits);
+        return view('cs_tracking', compact('data','CreateDates','piccits'));
         // return view('cs_tracking')->with('data',$data);
     }
 }

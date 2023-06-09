@@ -9,47 +9,72 @@ use Illuminate\Http\Request;
 class MainUserController extends Controller
 {
     public function index()
-    {   
-        $data = DB::table('CLICKUP_DATA as C')
-        ->select('C.TASK_ID', 'C.TASK_NAME', 'C.COMPLETION', 'C.STATUS', 'C.END_DATE', 'C.TEAM', 'C.BU', 'C.TYPE')
-        ->where('C.CREATE_DATE', function ($query) {
-            $query->select(DB::raw('MAX(CREATE_DATE)'))
-                ->from('CLICKUP_DATA')
-                ->whereRaw('C.TASK_ID = TASK_ID');
-        })
-        ->get();
-        // var_dump($data);
-        $data = $data->toArray();
+    {
+        $optiondate = session('optiondate');
+        $optionname = session('optionname');
+        var_dump($optiondate);
+        if ($optiondate == null && $optionname == null) {
+            $data = DB::table('CLICKUP_DATA as C')
+                ->select('C.TASK_ID', 'C.TASK_NAME', 'C.COMPLETION', 'C.STATUS', 'C.END_DATE', 'C.TEAM', 'C.BU', 'C.TYPE')
+                ->where('C.CREATE_DATE', function ($query) {
+                    $query
+                        ->select(DB::raw('MAX(CREATE_DATE)'))
+                        ->from('CLICKUP_DATA')
+                        ->whereRaw('C.TASK_ID = TASK_ID');
+                })
+                ->get();
+            // var_dump($data);
+            $data = $data->toArray();
 
-        $statusCounts = [
-            'COMPLETE' => 0,
-            'TO DO' => 0,
-            'DELAY' => 0,
-            'IN PROGRESS' => 0,
-            'CANCEL' => 0,
-            'HOLD' => 0,
-        ];
-        foreach ($data as $item) {
-            $status = $item->status;
-            if (isset($statusCounts[$status])) {
-                $statusCounts[$status]++;
+            $statusCounts = [
+                'COMPLETE' => 0,
+                'TO DO' => 0,
+                'DELAY' => 0,
+                'IN PROGRESS' => 0,
+                'CANCEL' => 0,
+                'HOLD' => 0,
+            ];
+            foreach ($data as $item) {
+                $status = $item->status;
+                if (isset($statusCounts[$status])) {
+                    $statusCounts[$status]++;
+                }
             }
         }
-    
+        elseif($optiondate != null){
+            $data = DB::table('CLICKUP_DATA as C')
+            ->select('C.TASK_ID', 'C.TASK_NAME', 'C.COMPLETION', 'C.STATUS', 'C.END_DATE', 'C.TEAM', 'C.BU', 'C.TYPE')
+            ->where('C.CREATE_DATE', '=', $optiondate)
+            ->where('C.CREATE_DATE', function ($query) {
+                $query
+                    ->select(DB::raw('MAX(CREATE_DATE)'))
+                    ->from('CLICKUP_DATA')
+                    ->whereRaw('C.TASK_ID = TASK_ID');
+            })
+            ->get();
+        }
         $CreateDates = DB::table('CLICKUP_DATA')
-        ->select('CREATE_DATE')
-        ->distinct()
-        ->get();
+            ->select('CREATE_DATE')
+            ->distinct()
+            ->get();
         $CreateDates = $CreateDates->toArray();
         // var_dump($statusCounts);
         // var_dump($CreateDates);
 
-        return view('main_user', compact('statusCounts'),compact('CreateDates'));
+        $piccits = DB::table('CLICKUP_DATA')
+            ->select('PIC_CIT')
+            ->distinct()
+            ->get();
+        $piccits = $piccits->toArray();
+        return view('main_user', compact('statusCounts', 'CreateDates', 'piccits'));
     }
+
     public function option(Request $request)
     {
-        $option= $request->option;
-        var_dump($option);
-
+        $optiondate = $request->optiondate;
+        $optionname = $request->optionname;
+        session($optiondate,$optionname);
+        var_dump($optiondate);
+        return redirect('/main_user');
     }
 }

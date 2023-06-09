@@ -192,18 +192,8 @@
                     </div>
 
                     <div class="row mb-2">
-                        <div class="col-sm-1">
+                        <div class="col-sm-5">
                             <h1>ChartJS</h1>
-                        </div>
-                        <div class="col-sm-4">
-                            <form id="myForm" action="/main_user_option" method="POST">
-                                @csrf
-                                <select id="option" class="custom-select" name="option" onchange="submitForm()">
-                                @foreach ($CreateDates as $createDate)
-                                <option>{{ $createDate->create_date }}</option>
-                                @endforeach
-                              </select>
-                            </form>
                         </div>
                         <div class="col-sm-7">
                             <ol class="breadcrumb float-sm-right">
@@ -211,6 +201,29 @@
                                 <li class="breadcrumb-item active">ChartJS</li>
                             </ol>
                         </div>
+                    <div class="row mb-2" style="margin-top: 5px">
+                        <div class="col-sm-2">
+                            <form id="myForm" action="/main_user_option" method="POST">
+                                @csrf
+                                <select id="option" class="custom-select" name="optiondate">
+                                @foreach ($CreateDates as $createDate)
+                                <option>{{ $createDate->create_date }}</option>
+                                @endforeach
+                              </select>
+                        </div>
+                        <div class="col-sm-2">
+                              <select id="option" class="custom-select" name="optionname">
+                                <option> no user </option>
+                              @foreach ($piccits as $piccit)
+                              <option>{{ $piccit->pic_cit }}</option>
+                              @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="submit" class="btn btn-primary btn-block">Search</button>
+                        </div>
+                    </form>
+                    </div>
                     </div>
                 </div><!-- /.container-fluid -->
                 <!-- box -->

@@ -96,6 +96,7 @@
                     <i class="far fa-circle nav-icon"></i>
                     <p>Tracking</p>
                   </a>
+
                 </li>
               </ul>
             </li>
@@ -115,24 +116,6 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1>Tracking</h1>
-            </div>
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Tracking</li>
-              </ol>
-            </div>
-          </div>
-        </div><!-- /.container-fluid -->
-      </section>
-
-      <!-- Main content -->
-      <section class="content">
-        <div class="container-fluid">
-
           <div class="row">
             <div class="col-lg-3 col-6">
               <!-- small box -->
@@ -195,6 +178,46 @@
             </div>
             <!-- ./col -->
           </div>
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>Tracking</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Tracking</li>
+              </ol>
+            </div>
+            <div class="row mb-2" style="margin-top: 5px">
+              <div class="col-sm-2">
+                  <form id="myForm" action="/main_user_option" method="POST">
+                      @csrf
+                      <select id="option" class="custom-select" name="optiondate" onchange="submitForm()">
+                      @foreach ($CreateDates as $createDate)
+                      <option>{{ $createDate->create_date }}</option>
+                      @endforeach
+                    </select>
+              </div>
+              <div class="col-sm-2">
+                    <select id="option" class="custom-select" name="optionname" onchange="submitForm()">
+                      <option> no user </option>
+                    @foreach ($piccits as $piccit)
+                    <option>{{ $piccit->pic_cit }}</option>
+                    @endforeach
+                  </select>
+              </div>
+              <div class="col-sm-2">
+                  <button type="submit" class="btn btn-primary btn-block">Search</button>
+              </div>
+          </form>
+          </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
 
           <div class="row">
             <div class="col-12">
