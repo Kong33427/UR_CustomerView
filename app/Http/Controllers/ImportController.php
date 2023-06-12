@@ -40,5 +40,7 @@ class ImportController extends Controller
         echo $time;
         // Excel::import(new UsersImport($time), $file);
         Excel::import(new UsersImport($time, $count), $file);
+        $message= 'ไม่มีไฟล์';
+        return back()->withStatus('File Imported');
         }
     }
