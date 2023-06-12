@@ -48,6 +48,8 @@ Route::get('/main_admin', function () {
 });
 Route::get('/cs_tracking',[TrackingController::class,'index']
 )->middleware('auth');
+Route::post('/cs_tracking_option',[TrackingController::class,'option']
+)->middleware('auth');
 Route::get('/cs_upload', function () {
     return view('cs_upload');
 })->middleware('auth');
@@ -61,6 +63,6 @@ Route::post('/users/import',[ImportController::class,'store']);
 Route::get('/logout', function () {
     Session::flush();
     Auth::logout();
-    return view('/login');
-})->middleware('auth');
+    return redirect('/login');
+});
 

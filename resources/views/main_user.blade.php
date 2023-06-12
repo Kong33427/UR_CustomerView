@@ -201,29 +201,42 @@
                                 <li class="breadcrumb-item active">ChartJS</li>
                             </ol>
                         </div>
-                    <div class="row mb-2" style="margin-top: 5px">
-                        <div class="col-sm-2">
-                            <form id="myForm" action="/main_user_option" method="POST">
-                                @csrf
-                                <select id="option" class="custom-select" name="optiondate">
-                                @foreach ($CreateDates as $createDate)
-                                <option>{{ $createDate->create_date }}</option>
-                                @endforeach
-                              </select>
+                        <div class="row mb-2" style="margin-top: 5px">
+                            <div class="col-sm-2">
+                                @php
+                                    $optiondate = session('optiondate');
+                                @endphp
+                                <form id="myForm" action="/main_user_option" method="POST">
+                                    @csrf
+                                    <select id="option" class="custom-select" name="optiondate">
+                                        <option value=""> newest </option>
+                                        @foreach ($CreateDates as $createDate)
+                                            <option value="{{ $createDate->create_date }}"
+                                                {{ $createDate->create_date == $optiondate ? 'selected' : '' }}>
+                                                {{ $createDate->create_date }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                            </div>
+                            <div class="col-sm-2">
+                                @php
+                                    $optionname = session('optionname');
+                                @endphp
+                                <select id="option" class="custom-select" name="optionname">
+                                    <option value=""> no user </option>
+                                    @foreach ($piccits as $piccit)
+                                        <option value="{{ $piccit->pic_cit }}"
+                                            {{ $piccit->pic_cit == $optionname ? 'selected' : '' }}>
+                                            {{ $piccit->pic_cit }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="submit" class="btn btn-primary btn-block">Search</button>
+                            </div>
+                            </form>
                         </div>
-                        <div class="col-sm-2">
-                              <select id="option" class="custom-select" name="optionname">
-                                <option> no user </option>
-                              @foreach ($piccits as $piccit)
-                              <option>{{ $piccit->pic_cit }}</option>
-                              @endforeach
-                            </select>
-                        </div>
-                        <div class="col-sm-2">
-                            <button type="submit" class="btn btn-primary btn-block">Search</button>
-                        </div>
-                    </form>
-                    </div>
                     </div>
                 </div><!-- /.container-fluid -->
                 <!-- box -->
@@ -336,9 +349,9 @@
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- Page specific script -->
     <script>
-          function submitForm() {
-        document.getElementById("myForm").submit();
-    }
+        function submitForm() {
+            document.getElementById("myForm").submit();
+        }
         $(function() {
             //-------------
             //- DONUT CHART -
