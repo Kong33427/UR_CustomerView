@@ -204,8 +204,9 @@
                                 @endphp
                                 <form id="myForm" action="/main_user_option" method="POST">
                                     @csrf
-                                    <select id="option" class="custom-select" name="optiondate">
-                                        <option value=""> newest </option>
+                                    <select id="option" class="custom-select" name="optiondate"
+                                        onchange="submitForm()">
+                                        <option value="">newest</option>
                                         @foreach ($CreateDates as $createDate)
                                             <option value="{{ $createDate->create_date }}"
                                                 {{ $createDate->create_date == $optiondate ? 'selected' : '' }}>
@@ -213,25 +214,26 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                </form>
                             </div>
                             <div class="col-sm-2">
                                 @php
                                     $optionname = session('optionname');
                                 @endphp
-                                <select id="option" class="custom-select" name="optionname">
-                                    <option value=""> no user </option>
-                                    @foreach ($piccits as $piccit)
-                                        <option value="{{ $piccit->pic_cit }}"
-                                            {{ $piccit->pic_cit == $optionname ? 'selected' : '' }}>
-                                            {{ $piccit->pic_cit }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <form id="myForm" action="/main_user_option" method="POST">
+                                    @csrf
+                                    <select id="option" class="custom-select" name="optionname"
+                                        onchange="submitForm()">
+                                        <option value="">no user</option>
+                                        @foreach ($piccits as $piccit)
+                                            <option value="{{ $piccit->pic_cit }}"
+                                                {{ $piccit->pic_cit == $optionname ? 'selected' : '' }}>
+                                                {{ $piccit->pic_cit }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </form>
                             </div>
-                            <div class="col-sm-2">
-                                <button type="submit" class="btn btn-primary btn-block">Search</button>
-                            </div>
-                            </form>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
