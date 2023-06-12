@@ -15,14 +15,13 @@ class ImportController extends Controller
     }
     public function store(Request $request)
     {
-        $foundRow = null;
         $file = $request->file('file');
-        // echo $file;
-        if ($file == null) {
-            $message = 'ไม่มีไฟล์';
-            return back()->with('message', $message);
+        echo $file;
+        if ($file == NULL ){
+            $message= 'ไม่มีไฟล์';
+            return back()->with('message',$message);
         }
-        $count=1;
+        $count=2;
         $time = date('Y-m-d H:i:s');
         $data = Excel::toArray([], $file);
         foreach ($data as $row) {
@@ -35,12 +34,11 @@ class ImportController extends Controller
                     var_dump($count);
                     break;
                 }
-
             }
         }
+        $time= date('Y-m-d H:i:s');
+        echo $time;
+        // Excel::import(new UsersImport($time), $file);
+        Excel::import(new UsersImport($time, $count), $file);
         }
     }
-
-    //     // return back()->withStatus('File Imported');
-    // }
-
