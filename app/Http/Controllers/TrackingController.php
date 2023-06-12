@@ -50,6 +50,21 @@ class TrackingController extends Controller
                 ->get();
             // var_dump($data);
         }
+        $statusCounts = [
+            'COMPLETE' => 0,
+            'TO DO' => 0,
+            'DELAY' => 0,
+            'IN PROGRESS' => 0,
+            'CANCEL' => 0,
+            'HOLD' => 0,
+        ];
+        foreach ($data as $item) {
+            $status = $item->status;
+            if (isset($statusCounts[$status])) {
+                $statusCounts[$status]++;
+            }
+        }
+
         //-----get all data----
         // $data = DB::table('CLICKUP_DATA')
         // ->select('TASK_ID', 'TASK_NAME','COMPLETION','STATUS','END_DATE','TEAM','BU','TYPE')
@@ -69,7 +84,7 @@ class TrackingController extends Controller
             ->get();
         $piccits = $piccits->toArray();
         // var_dump($piccits);
-        return view('cs_tracking', compact('data', 'CreateDates', 'piccits'));
+        return view('cs_tracking', compact('data', 'statusCounts', 'CreateDates', 'piccits'));
         // return view('cs_tracking')->with('data',$data);
     }
     public function option(Request $request)

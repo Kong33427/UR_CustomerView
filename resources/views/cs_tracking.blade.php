@@ -123,9 +123,8 @@
                             <!-- small box -->
                             <div class="small-box bg-info">
                                 <div class="inner">
-                                    <h3>150</h3>
-
-                                    <p>Total</p>
+                                    <h3>@php echo $statusCounts['COMPLETE']; @endphp</h3>
+                                    <p>Complete</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-bag"></i>
@@ -139,8 +138,7 @@
                             <!-- small box -->
                             <div class="small-box bg-success">
                                 <div class="inner">
-                                    <h3>53</h3>
-
+                                    <h3>@php echo $statusCounts['IN PROGRESS']; @endphp</h3>
                                     <p>In Progress</p>
                                 </div>
                                 <div class="icon">
@@ -155,9 +153,8 @@
                             <!-- small box -->
                             <div class="small-box bg-warning">
                                 <div class="inner">
-                                    <h3>44</h3>
-
-                                    <p>Open</p>
+                                    <h3>@php echo $statusCounts['DELAY']; @endphp</h3>
+                                    <p>Delay</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-person-add"></i>
@@ -171,9 +168,8 @@
                             <!-- small box -->
                             <div class="small-box bg-danger">
                                 <div class="inner">
-                                    <h3>65</h3>
-
-                                    <p>Closed</p>
+                                    <h3>@php echo $statusCounts['CANCEL']; @endphp</h3>
+                                    <p>cancel</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-pie-graph"></i>
