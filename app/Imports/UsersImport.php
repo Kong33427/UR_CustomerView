@@ -7,18 +7,17 @@ use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-
 class UsersImport implements ToModel, WithHeadingRow
 {
     /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
+     * @param array $row
+     *
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
     private $additionalValue;
     protected $count;
 
-    public function __construct($additionalValue,$count)
+    public function __construct($additionalValue, $count)
     {
         $this->additionalValue = $additionalValue;
         $this->count = $count;
@@ -60,7 +59,7 @@ class UsersImport implements ToModel, WithHeadingRow
             'CURRENT_STATUS' => $row[30],
             'NEXT_STATUS' => $row[31],
             'MAN_DAY' => $row[32],
-            'CREATE_DATE'=> $this->additionalValue,
+            'CREATE_DATE' => $this->additionalValue,
         ]);
     }
     public function rules(): array
@@ -78,28 +77,28 @@ class UsersImport implements ToModel, WithHeadingRow
             8 => 'required', // Task Name validation
             9 => 'required', // Task Name validation
             10 => 'required', // Task Name validation
-            11=> 'required', // Task Name validation
+            11 => 'required', // Task Name validation
             12 => 'required', // Task Name validation
             13 => 'required', // Task Name validation
             14 => 'required', // Task Name validation
             15 => 'required', // Task Name validation
             16 => 'required', // Task Name validation
             17 => 'required', // Task Name validation
-            18=> 'required', // Task Name validation
+            18 => 'required', // Task Name validation
             19 => 'required', // Task Name validation
             20 => 'required', // Task Name validation
             21 => 'required', // Task Name validation
             22 => 'required', // Task Name validation
-            23=> 'required', // Task Name validation
-            24=> 'required', // Task Name validation
-            25=> 'required', // Task Name validation
-            26=> 'required', // Task Name validation
-            27=> 'required', // Task Name validation
-            28=> 'required', // Task Name validation
-            29=> 'required', // Task Name validation
-            30=> 'required', // Task Name validation
-            31=> 'required', // Task Name validation
-            32=> 'required', // Task Name validation
+            23 => 'required', // Task Name validation
+            24 => 'required', // Task Name validation
+            25 => 'required', // Task Name validation
+            26 => 'required', // Task Name validation
+            27 => 'required', // Task Name validation
+            28 => 'required', // Task Name validation
+            29 => 'required', // Task Name validation
+            30 => 'required', // Task Name validation
+            31 => 'required', // Task Name validation
+            32 => 'required', // Task Name validation
             // Rest of the fields' validation rules
         ];
     }

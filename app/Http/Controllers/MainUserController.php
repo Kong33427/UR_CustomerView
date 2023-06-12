@@ -29,31 +29,31 @@ class MainUserController extends Controller
             // var_dump($data);
             $data = $data->toArray();
         }
-        if($optiondate != null){
+        if ($optiondate != null) {
             $data = DB::table('CLICKUP_DATA as C')
-            ->select('C.TASK_ID', 'C.TASK_NAME', 'C.COMPLETION', 'C.STATUS', 'C.END_DATE', 'C.TEAM', 'C.BU', 'C.TYPE')
-            ->where('C.CREATE_DATE', '=', $optiondate)
-            ->where('C.CREATE_DATE', function ($query) {
-                $query
-                    ->select(DB::raw('MAX(CREATE_DATE)'))
-                    ->from('CLICKUP_DATA')
-                    ->whereRaw('C.TASK_ID = TASK_ID');
-            })
-            ->get();
+                ->select('C.TASK_ID', 'C.TASK_NAME', 'C.COMPLETION', 'C.STATUS', 'C.END_DATE', 'C.TEAM', 'C.BU', 'C.TYPE')
+                ->where('C.CREATE_DATE', '=', $optiondate)
+                ->where('C.CREATE_DATE', function ($query) {
+                    $query
+                        ->select(DB::raw('MAX(CREATE_DATE)'))
+                        ->from('CLICKUP_DATA')
+                        ->whereRaw('C.TASK_ID = TASK_ID');
+                })
+                ->get();
             // var_dump($data);
             $data = $data->toArray();
         }
-        if($optionname != null){
+        if ($optionname != null) {
             $data = DB::table('CLICKUP_DATA as C')
-            ->select('C.TASK_ID', 'C.TASK_NAME', 'C.COMPLETION', 'C.STATUS', 'C.END_DATE', 'C.TEAM', 'C.BU', 'C.TYPE')
-            ->where('C.PIC_CIT', '=', $optionname)
-            ->where('C.CREATE_DATE', function ($query) {
-                $query
-                    ->select(DB::raw('MAX(CREATE_DATE)'))
-                    ->from('CLICKUP_DATA')
-                    ->whereRaw('C.TASK_ID = TASK_ID');
-            })
-            ->get();
+                ->select('C.TASK_ID', 'C.TASK_NAME', 'C.COMPLETION', 'C.STATUS', 'C.END_DATE', 'C.TEAM', 'C.BU', 'C.TYPE')
+                ->where('C.PIC_CIT', '=', $optionname)
+                ->where('C.CREATE_DATE', function ($query) {
+                    $query
+                        ->select(DB::raw('MAX(CREATE_DATE)'))
+                        ->from('CLICKUP_DATA')
+                        ->whereRaw('C.TASK_ID = TASK_ID');
+                })
+                ->get();
             // var_dump($data);
             $data = $data->toArray();
         }

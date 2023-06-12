@@ -17,30 +17,30 @@ class ImportController extends Controller
     {
         $file = $request->file('file');
         echo $file;
-        if ($file == NULL ){
-            $message= 'ไม่มีไฟล์';
-            return back()->with('message',$message);
+        if ($file == null) {
+            $message = 'ไม่มีไฟล์';
+            return back()->with('message', $message);
         }
-        $count=2;
+        $count = 2;
         $time = date('Y-m-d H:i:s');
         $data = Excel::toArray([], $file);
         foreach ($data as $row) {
             foreach ($row as $col) {
                 $count++;
-                $cols=implode($col);
+                $cols = implode($col);
                 // var_dump($cols);
 
-                if (strpos($cols,'Task') !== false) {
+                if (strpos($cols, 'Task') !== false) {
                     var_dump($count);
                     break;
                 }
             }
         }
-        $time= date('Y-m-d H:i:s');
+        $time = date('Y-m-d H:i:s');
         echo $time;
         // Excel::import(new UsersImport($time), $file);
         Excel::import(new UsersImport($time, $count), $file);
-        $message= 'ไม่มีไฟล์';
+        $message = 'ไม่มีไฟล์';
         return back()->withStatus('File Imported');
-        }
     }
+}
