@@ -262,6 +262,7 @@
                                                 <th>Team</th>
                                                 <th>BU</th>
                                                 <th>Type</th>
+                                                <th>project owner</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -288,6 +289,7 @@
                                                     <td>{{ $item->team }}</td>
                                                     <td>{{ $item->bu }}</td>
                                                     <td>{{ $item->type }}</td>
+                                                    <td>{{ $item->pic_cit }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -302,6 +304,7 @@
                                                 <th>Team</th>
                                                 <th>BU</th>
                                                 <th>Type</th>
+                                                <th>project owner</th>
                                             </tr>
                                         </tfoot>
                                     </table>

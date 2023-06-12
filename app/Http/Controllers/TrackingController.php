@@ -35,7 +35,7 @@ class TrackingController extends Controller
                         ->whereRaw('C.TASK_ID = TASK_ID');
                 })
                 ->get();
-            var_dump($data);
+            // var_dump($data);
         }
         if ($optionname != null) {
             $data = DB::table('CLICKUP_DATA as C')
@@ -48,7 +48,7 @@ class TrackingController extends Controller
                         ->whereRaw('C.TASK_ID = TASK_ID');
                 })
                 ->get();
-            var_dump($data);
+            // var_dump($data);
         }
         //-----get all data----
         // $data = DB::table('CLICKUP_DATA')
