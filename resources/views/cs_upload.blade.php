@@ -294,11 +294,9 @@
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
-                <b>Version</b> 3.2.0
+                <b>Version</b> 0.0.1
             </div>
-            <strong>Copyright &copy; 2022-2023 <a href="https://adminlte.io">IT Cutomer Service</a>.</strong> All
-            rights
-            reserved.
+            <strong>Nanyang Textile</strong>
         </footer>
 
         <!-- Control Sidebar -->

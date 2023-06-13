@@ -22,8 +22,8 @@ class MainUserController extends Controller
                 ->where('C.CREATE_DATE', function ($query) {
                     $query
                         ->select(DB::raw('MAX(CREATE_DATE)'))
-                        ->from('CLICKUP_DATA')
-                        ->whereRaw('C.TASK_ID = TASK_ID');
+                        ->from('CLICKUP_DATA');
+                        // ->whereRaw('C.TASK_ID = TASK_ID');
                 })
                 ->get();
             // var_dump($data);
@@ -80,9 +80,10 @@ class MainUserController extends Controller
         $CreateDates = $CreateDates->toArray();
 
         $piccits = DB::table('CLICKUP_DATA')
-            ->select('PIC_CIT')
-            ->distinct()
-            ->get();
+        ->select('PIC_CIT')
+        ->distinct()
+        ->whereNotNull('PIC_CIT')
+        ->get();
         $piccits = $piccits->toArray();
         return view('main_user', compact('statusCounts', 'CreateDates', 'piccits'));
     }

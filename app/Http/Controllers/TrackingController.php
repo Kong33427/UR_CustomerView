@@ -81,6 +81,7 @@ class TrackingController extends Controller
         $piccits = DB::table('CLICKUP_DATA')
             ->select('PIC_CIT')
             ->distinct()
+            ->whereNotNull('PIC_CIT')
             ->get();
         $piccits = $piccits->toArray();
         // var_dump($piccits);
