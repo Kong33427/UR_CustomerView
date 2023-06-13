@@ -22,6 +22,7 @@ class UsersImport implements ToModel, WithHeadingRow
         $this->additionalValue = $additionalValue;
         $this->count = $count;
     }
+    
     public function model(array $row)
     {
         // var_dump($row);

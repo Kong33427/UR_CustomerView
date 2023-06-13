@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AdminLTE 3 | ChartJS</title>
-
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -29,7 +28,6 @@
                     <a href="../../index3.html" class="nav-link">Home</a>
                 </li>
             </ul>
-
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
@@ -41,7 +39,6 @@
             </ul>
         </nav>
         <!-- /.navbar -->
-
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
@@ -50,7 +47,6 @@
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">AdminLTE 3</span>
             </a>
-
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
@@ -65,7 +61,6 @@
                             @endphp</a>
                     </div>
                 </div>
-
                 <!-- SidebarSearch Form -->
                 <div class="form-inline">
                     <div class="input-group" data-widget="sidebar-search">
@@ -78,7 +73,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
@@ -113,14 +107,12 @@
                             </a>
                         </li>
                         </li>
-
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
         </aside>
-
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -189,7 +181,6 @@
                         </div>
                         <!-- ./col -->
                     </div>
-
                     <div class="row mb-2">
                         <div class="col-sm-5">
                             <h1>ChartJS</h1>
@@ -242,7 +233,6 @@
                 </div><!-- /.container-fluid -->
                 <!-- box -->
             </section>
-
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
@@ -251,7 +241,6 @@
                         <div class="card card-danger" style="margin-right: 5px">
                             <div class="card-header">
                                 <h3 class="card-title">Donut Chart</h3>
-
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
@@ -268,12 +257,10 @@
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
-
                         <!-- PIE CHART -->
                         <div class="card card-danger" style="padding-right: 5px">
                             <div class="card-header">
                                 <h3 class="card-title">Pie Chart</h3>
-
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
@@ -290,13 +277,10 @@
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
-
-
                         <!-- BAR CHART -->
                         <div class="card card-success">
                             <div class="card-header">
                                 <h3 class="card-title">Bar Chart</h3>
-
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
@@ -315,9 +299,7 @@
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
-
                     </div>
-
                     <!-- /.row -->
                 </div><!-- /.container-fluid -->
             </section>
@@ -330,7 +312,6 @@
             </div>
             <strong>Nanyang Textile</strong>
         </footer>
-
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Add Content Here -->
@@ -338,7 +319,6 @@
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
-
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
@@ -360,7 +340,6 @@
             var data = @json($statusCounts);
             var labels = Object.keys(data);
             var values = Object.values(data);
-
             var ctx = document.getElementById('donutChart').getContext('2d');
             var chart = new Chart(ctx, {
                 type: 'doughnut',
@@ -375,7 +354,6 @@
                             'rgb(255, 206, 86)',
                             'rgb(150, 150, 150)',
                             'rgb(0, 0, 0)',
-
                         ],
                         borderWidth: 1
                     }]
@@ -386,7 +364,6 @@
             });
             //Create pie or douhnut chart
             // You can switch between pie and douhnut using the method below.
-
             //-------------
             //- PIE CHART -
             //-------------
@@ -394,7 +371,6 @@
             var data = @json($statusCounts);
             var labels = Object.keys(data);
             var values = Object.values(data);
-
             var ctx = document.getElementById('pieChart').getContext('2d');
             var chart = new Chart(ctx, {
                 type: 'pie',

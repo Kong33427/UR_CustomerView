@@ -22,15 +22,5 @@ class loginController extends Controller
         return back()->withErrors([
             'password' => 'Wrong username or password',
         ]);
-        // Auth::attempt(['username' => $request->username, 'password' => $request->password]);
-        // $user = Auth::user();
-        // if ($user) {
-        //     // User is authenticated
-        //     echo "Welcome, " . $user->username;
-        //     return redirect()->intended('/a');
-        // } else {
-        //     // User is not authenticated
-        //     echo "Please log in";
-        // }
     }
 }
