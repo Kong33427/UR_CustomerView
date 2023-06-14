@@ -57,6 +57,8 @@ class Clickup extends Authenticatable
         'CURRENT_STATUS',
         'NEXT_STATUS',
         'MAN_DAY',
+        'REQUEST_EMP_CODE',
+        'KEY_ACTIVITY',
         'CREATE_DATE',
 
         

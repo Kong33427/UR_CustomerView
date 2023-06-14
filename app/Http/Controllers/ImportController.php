@@ -21,7 +21,7 @@ class ImportController extends Controller
             $message = 'ไม่มีไฟล์';
             return back()->with('message', $message);
         }
-        $count = 2;
+        $count = 1;
         $time = date('Y-m-d H:i:s');
         $data = Excel::toArray([], $file);
         foreach ($data as $row) {

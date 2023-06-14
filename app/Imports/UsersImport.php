@@ -5,9 +5,9 @@ namespace App\Imports;
 use App\Models\Clickup;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 
-class UsersImport implements ToModel, WithHeadingRow
+class UsersImport implements ToModel, WithStartRow
 {
     /**
      * @param array $row
@@ -60,47 +60,13 @@ class UsersImport implements ToModel, WithHeadingRow
             'CURRENT_STATUS' => $row[30],
             'NEXT_STATUS' => $row[31],
             'MAN_DAY' => $row[32],
+            'REQUEST_EMP_CODE' => $row[33],
+            'KEY_ACTIVITY' => $row[34],
             'CREATE_DATE' => $this->additionalValue,
         ]);
     }
-    public function rules(): array
+    public function startRow(): int
     {
-        // Define your validation rules here
-        return [
-            0 => 'required', // Task ID validation
-            1 => 'required', // Task Name validation
-            2 => 'required', // Task Name validation
-            3 => 'required', // Task Name validation
-            4 => 'required', // Task Name validation
-            5 => 'required', // Task Name validation
-            6 => 'required', // Task Name validation
-            7 => 'required', // Task Name validation
-            8 => 'required', // Task Name validation
-            9 => 'required', // Task Name validation
-            10 => 'required', // Task Name validation
-            11 => 'required', // Task Name validation
-            12 => 'required', // Task Name validation
-            13 => 'required', // Task Name validation
-            14 => 'required', // Task Name validation
-            15 => 'required', // Task Name validation
-            16 => 'required', // Task Name validation
-            17 => 'required', // Task Name validation
-            18 => 'required', // Task Name validation
-            19 => 'required', // Task Name validation
-            20 => 'required', // Task Name validation
-            21 => 'required', // Task Name validation
-            22 => 'required', // Task Name validation
-            23 => 'required', // Task Name validation
-            24 => 'required', // Task Name validation
-            25 => 'required', // Task Name validation
-            26 => 'required', // Task Name validation
-            27 => 'required', // Task Name validation
-            28 => 'required', // Task Name validation
-            29 => 'required', // Task Name validation
-            30 => 'required', // Task Name validation
-            31 => 'required', // Task Name validation
-            32 => 'required', // Task Name validation
-            // Rest of the fields' validation rules
-        ];
+        return $this->count;
     }
 }
