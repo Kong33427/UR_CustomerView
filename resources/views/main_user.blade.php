@@ -178,7 +178,7 @@
                         <!-- ./col -->
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
-                            <div class="small-box bg-danger">
+                            <div class="small-box bg-secondary">
                                 <div class="inner">
                                     <h3>@php echo $statusCounts['COMPLETE']+$statusCounts['CANCEL']; @endphp</h3>
                                     <p>Closed</p>
@@ -195,24 +195,35 @@
                     <label>Requester</label>
                     <div class="row mb-2">
                         <div class="row mb-2" style="margin-top: 5px">
-                            <div class="col-sm-5">
-                                @php
-                                    $optionrequester = session('optionrequester');
-                                @endphp
-                                <form id="myForm" action="/main_user_option" method="POST">
-                                    @csrf
-                                    <select id="option" class="custom-select" name="optionrequester"
-                                        onchange="submitForm()">
-                                        <option>no user</option>
-                                        @foreach ($Createrequester as $Createrequester)
-                                            <option value="{{ $Createrequester->requester }}"
-                                                {{ $Createrequester->requester == $optionrequester ? 'selected' : '' }}>
-                                                {{ $Createrequester->requester }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </form>
+                            <div class="gray-box">
+                                <div class="col-sm-10">
+                                    @php
+                                        $optionrequester = session('optionrequester');
+                                    @endphp
+                                    <form id="myForm" action="/main_user_option" method="POST">
+                                        @csrf
+                                        <div class="d-flex">
+                                            <select id="option" class="custom-select" name="optionrequester">
+                                                <option value=''></option>
+                                                @foreach ($Createrequester as $Createrequester)
+                                                    <option value="{{ $Createrequester->requester }}"
+                                                        {{ $Createrequester->requester == $optionrequester ? 'selected' : '' }}>
+                                                        {{ $Createrequester->requester }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                            
+                                            <select id="option" class="custom-select" name="optiontype">
+                                                <option value=''></option>project</option>
+                                                <option value='3. UR'>UR</option>
+                                            </select>
+                            
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
+                            
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->

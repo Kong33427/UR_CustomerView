@@ -14,10 +14,12 @@ class MainUserController extends Controller
         // $optiondate = Session::get('optiondate');
         // $optionname = Session::get('optionname');
         $optionrequester = Session::get('optionrequester');
+        $optiontype = Session::get('optiontype');
+        // var_dump($optiontype);
         var_dump($optionrequester);
-        // var_dump($optionname);
-        $piccits = [];
-        if ($optionrequester == null || $optionrequester == 'no user') {
+        var_dump($optiontype);
+        if ($optionrequester == null && $optiontype == null) {
+            var_dump('1');
             Session::forget('optionrequester');
             $data = DB::table('CLICKUP_DATA as C')
                 ->select('C.TASK_ID', 'C.TASK_NAME', 'C.COMPLETION', 'C.STATUS', 'C.END_DATE', 'C.TEAM', 'C.BU', 'C.TYPE')
@@ -36,10 +38,40 @@ class MainUserController extends Controller
                 }
             $data = $data->toArray();
         }
-        if ($optionrequester != null && $optionrequester != 'no user') {
+        if ($optionrequester != null && $optiontype ==null) {
+            var_dump('2');
             $data = DB::table('CLICKUP_DATA as C')
                 ->select('C.TASK_ID', 'C.TASK_NAME', 'C.COMPLETION', 'C.STATUS', 'C.END_DATE', 'C.TEAM', 'C.BU', 'C.TYPE')
-                ->where('C.requester', '=', $optionrequester)
+                ->where('C.REQUESTER', '=', $optionrequester)
+                ->where('C.CREATE_DATE', function ($query) {
+                    $query
+                        ->select(DB::raw('MAX(CREATE_DATE)'))
+                        ->from('CLICKUP_DATA')
+                        ->whereRaw('C.TASK_ID = TASK_ID');
+                })
+                ->get();
+            // var_dump($data);
+            $data = $data->toArray();
+        }
+        if ($optionrequester == null && $optiontype !=null) {
+            $data = DB::table('CLICKUP_DATA as C')
+                ->select('C.TASK_ID', 'C.TASK_NAME', 'C.COMPLETION', 'C.STATUS', 'C.END_DATE', 'C.TEAM', 'C.BU', 'C.TYPE')
+                ->where('C.TYPE', '=', $optiontype)
+                ->where('C.CREATE_DATE', function ($query) {
+                    $query
+                        ->select(DB::raw('MAX(CREATE_DATE)'))
+                        ->from('CLICKUP_DATA')
+                        ->whereRaw('C.TASK_ID = TASK_ID');
+                })
+                ->get();
+            // var_dump($data);
+            $data = $data->toArray();
+        }
+        if ($optionrequester != null && $optiontype !=null) {
+            $data = DB::table('CLICKUP_DATA as C')
+                ->select('C.TASK_ID', 'C.TASK_NAME', 'C.COMPLETION', 'C.STATUS', 'C.END_DATE', 'C.TEAM', 'C.BU', 'C.TYPE')
+                ->where('C.TYPE', '=', $optiontype)
+                ->where('C.REQUESTER', '=', $optionrequester)
                 ->where('C.CREATE_DATE', function ($query) {
                     $query
                         ->select(DB::raw('MAX(CREATE_DATE)'))
@@ -80,7 +112,9 @@ class MainUserController extends Controller
     {
 
         $optionrequester = $request->optionrequester;
+        $optiontype = $request->optiontype;
         Session::put('optionrequester', $optionrequester);
+        Session::put('optiontype', $optiontype);
 
         return redirect('/main_user');
     }
