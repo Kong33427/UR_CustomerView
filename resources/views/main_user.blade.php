@@ -115,6 +115,17 @@
         </aside>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+            <div class="row mb-2">
+                <div class="col-sm-5">
+                    <h1>ChartJS</h1>
+                </div>
+                <div class="col-sm-7">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">ChartJS</li>
+                    </ol>
+                </div>
+            </div>
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <!-- box -->
@@ -124,13 +135,13 @@
                             <!-- small box -->
                             <div class="small-box bg-info">
                                 <div class="inner">
-                                    <h3>@php echo $statusCounts['COMPLETE']; @endphp</h3>
+                                    <h3>@php echo $sum = array_sum($statusCounts); @endphp</h3>
                                     <p>Complete</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-bag"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i
+                                <a href="#" class="small-box-footer">Total <i
                                         class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
@@ -139,7 +150,7 @@
                             <!-- small box -->
                             <div class="small-box bg-success">
                                 <div class="inner">
-                                    <h3>@php echo $statusCounts['IN PROGRESS']; @endphp</h3>
+                                    <h3>@php echo $statusCounts['IN PROGRESS'] + $statusCounts['DELAY']; @endphp</h3>
                                     <p>In Progress</p>
                                 </div>
                                 <div class="icon">
@@ -154,8 +165,8 @@
                             <!-- small box -->
                             <div class="small-box bg-warning">
                                 <div class="inner">
-                                    <h3>@php echo $statusCounts['DELAY']; @endphp</h3>
-                                    <p>Delay</p>
+                                    <h3>@php echo $statusCounts['TO DO']; @endphp</h3>
+                                    <p>Open</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-person-add"></i>
@@ -169,8 +180,8 @@
                             <!-- small box -->
                             <div class="small-box bg-danger">
                                 <div class="inner">
-                                    <h3>@php echo $statusCounts['CANCEL']; @endphp</h3>
-                                    <p>cancel</p>
+                                    <h3>@php echo $statusCounts['COMPLETE']+$statusCounts['CANCEL']; @endphp</h3>
+                                    <p>Closed</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-pie-graph"></i>
@@ -181,48 +192,22 @@
                         </div>
                         <!-- ./col -->
                     </div>
+                    <label>Requester</label>
                     <div class="row mb-2">
-                        <div class="col-sm-5">
-                            <h1>ChartJS</h1>
-                        </div>
-                        <div class="col-sm-7">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">ChartJS</li>
-                            </ol>
-                        </div>
                         <div class="row mb-2" style="margin-top: 5px">
-                            <div class="col-sm-2">
+                            <div class="col-sm-5">
                                 @php
-                                    $optiondate = session('optiondate');
+                                    $optionrequester = session('optionrequester');
                                 @endphp
                                 <form id="myForm" action="/main_user_option" method="POST">
                                     @csrf
-                                    <select id="option" class="custom-select" name="optiondate"
+                                    <select id="option" class="custom-select" name="optionrequester"
                                         onchange="submitForm()">
-                                        <option value="">newest</option>
-                                        @foreach ($CreateDates as $createDate)
-                                            <option value="{{ $createDate->create_date }}"
-                                                {{ $createDate->create_date == $optiondate ? 'selected' : '' }}>
-                                                {{ $createDate->create_date }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </form>
-                            </div>
-                            <div class="col-sm-2">
-                                @php
-                                    $optionname = session('optionname');
-                                @endphp
-                                <form id="myForm" action="/main_user_option" method="POST">
-                                    @csrf
-                                    <select id="option" class="custom-select" name="optionname"
-                                        onchange="submitForm()">
-                                        <option value="">no user</option>
-                                        @foreach ($piccits as $piccit)
-                                            <option value="{{ $piccit->pic_cit }}"
-                                                {{ $piccit->pic_cit == $optionname ? 'selected' : '' }}>
-                                                {{ $piccit->pic_cit }}
+                                        <option>no user</option>
+                                        @foreach ($Createrequester as $Createrequester)
+                                            <option value="{{ $Createrequester->requester }}"
+                                                {{ $Createrequester->requester == $optionrequester ? 'selected' : '' }}>
+                                                {{ $Createrequester->requester }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -232,11 +217,13 @@
                     </div>
                 </div><!-- /.container-fluid -->
                 <!-- box -->
+
             </section>
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
+                        <div class="col-md-6">
                         <!-- DONUT CHART -->
                         <div class="card card-danger" style="margin-right: 5px">
                             <div class="card-header">
@@ -251,33 +238,14 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <canvas id="donutChart"
-                                    style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                                <canvas id="donutChart"></canvas>
                             </div>
                             <!-- /.card-body -->
                         </div>
-                        <!-- /.card -->
-                        <!-- PIE CHART -->
-                        <div class="card card-danger" style="padding-right: 5px">
-                            <div class="card-header">
-                                <h3 class="card-title">Pie Chart</h3>
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="pieChart"
-                                    style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
+                    </div>
                         <!-- /.card -->
                         <!-- BAR CHART -->
+                        <div class="col-md-6">
                         <div class="card card-success">
                             <div class="card-header">
                                 <h3 class="card-title">Bar Chart</h3>
@@ -292,13 +260,13 @@
                             </div>
                             <div class="card-body">
                                 <div class="chart">
-                                    <canvas id="barChart"
-                                        style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                                    <canvas id="barChart"></canvas>
                                 </div>
                             </div>
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
+                    </div>
                     </div>
                     <!-- /.row -->
                 </div><!-- /.container-fluid -->
@@ -362,45 +330,11 @@
                     responsive: true
                 }
             });
-            //Create pie or douhnut chart
-            // You can switch between pie and douhnut using the method below.
-            //-------------
-            //- PIE CHART -
-            //-------------
-            // Get context with jQuery - using jQuery's .get() method.
-            var data = @json($statusCounts);
-            var labels = Object.keys(data);
-            var values = Object.values(data);
-            var ctx = document.getElementById('pieChart').getContext('2d');
-            var chart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        data: values,
-                        backgroundColor: [
-                            'rgb(75, 192, 192)',
-                            'rgb(54, 162, 235)',
-                            'rgb(255, 99, 132)',
-                            'rgb(255, 206, 86)',
-                            'rgb(150, 150, 150)',
-                            'rgb(0, 0, 0)',
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true
-                }
-            });
-            //Create pie or douhnut chart
-            // You can switch between pie and douhnut using the method below.
 
             //-------------
             //- BAR CHART -
             //-------------
             var data = @json($statusCounts);
-
             var labels = Object.keys(data);
             var values = Object.values(data);
 

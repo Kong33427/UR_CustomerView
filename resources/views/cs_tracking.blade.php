@@ -126,6 +126,17 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+                        <div class="row mb-2">
+                <div class="col-sm-5">
+                    <h1>Tracking</h1>
+                </div>
+                <div class="col-sm-7">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">ChartJS</li>
+                    </ol>
+                </div>
+            </div>
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <div class="container-fluid">
@@ -134,7 +145,7 @@
                             <!-- small box -->
                             <div class="small-box bg-info">
                                 <div class="inner">
-                                    <h3>@php echo $statusCounts['COMPLETE']; @endphp</h3>
+                                    <h3>@php echo array_sum($statusCounts); @endphp</h3>
                                     <p>Complete</p>
                                 </div>
                                 <div class="icon">
@@ -149,7 +160,7 @@
                             <!-- small box -->
                             <div class="small-box bg-success">
                                 <div class="inner">
-                                    <h3>@php echo $statusCounts['IN PROGRESS']; @endphp</h3>
+                                    <h3>@php echo $statusCounts['IN PROGRESS'] + $statusCounts['DELAY']; @endphp</h3>
                                     <p>In Progress</p>
                                 </div>
                                 <div class="icon">
@@ -164,8 +175,8 @@
                             <!-- small box -->
                             <div class="small-box bg-warning">
                                 <div class="inner">
-                                    <h3>@php echo $statusCounts['DELAY']; @endphp</h3>
-                                    <p>Delay</p>
+                                    <h3>@php echo $statusCounts['TO DO']; @endphp</h3>
+                                    <p>Open</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-person-add"></i>
@@ -179,8 +190,8 @@
                             <!-- small box -->
                             <div class="small-box bg-danger">
                                 <div class="inner">
-                                    <h3>@php echo $statusCounts['CANCEL']; @endphp</h3>
-                                    <p>cancel</p>
+                                    <h3>@php echo $statusCounts['COMPLETE']+$statusCounts['CANCEL']; @endphp</h3>
+                                    <p>Closed</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-pie-graph"></i>
@@ -201,44 +212,29 @@
                                 <li class="breadcrumb-item active">Tracking</li>
                             </ol>
                         </div>
+                        <label>Requester</label>
+                    <div class="row mb-2">
                         <div class="row mb-2" style="margin-top: 5px">
-                            <div class="col-sm-2">
+                            <div class="col-sm-5">
                                 @php
-                                    $optiondate = session('optiondate');
+                                    $optionrequester = session('optionrequester');
                                 @endphp
                                 <form id="myForm" action="/main_user_option" method="POST">
                                     @csrf
-                                    <select id="option" class="custom-select" name="optiondate"
+                                    <select id="option" class="custom-select" name="optionrequester"
                                         onchange="submitForm()">
                                         <option value="">newest</option>
-                                        @foreach ($CreateDates as $createDate)
-                                            <option value="{{ $createDate->create_date }}"
-                                                {{ $createDate->create_date == $optiondate ? 'selected' : '' }}>
-                                                {{ $createDate->create_date }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </form>
-                            </div>
-                            <div class="col-sm-2">
-                                @php
-                                    $optionname = session('optionname');
-                                @endphp
-                                <form id="myForm" action="/main_user_option" method="POST">
-                                    @csrf
-                                    <select id="option" class="custom-select" name="optionname"
-                                        onchange="submitForm()">
-                                        <option value="">no user</option>
-                                        @foreach ($piccits as $piccit)
-                                            <option value="{{ $piccit->pic_cit }}"
-                                                {{ $piccit->pic_cit == $optionname ? 'selected' : '' }}>
-                                                {{ $piccit->pic_cit }}
+                                        @foreach ($Createrequester as $Createrequester)
+                                            <option value="{{ $Createrequester->requester }}"
+                                                {{ $Createrequester->requester == $optionrequester ? 'selected' : '' }}>
+                                                {{ $Createrequester->requester }}
                                             </option>
                                         @endforeach
                                     </select>
                                 </form>
                             </div>
                         </div>
+                    </div>
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
@@ -289,6 +285,8 @@
                                                             echo 'class="badge badge-warning"';
                                                         } elseif ($item->status == 'IN PROGRESS') {
                                                             echo 'class="badge badge-info"';
+                                                        } elseif ($item->status == 'HOLD') {
+                                                            echo 'class="badge badge-danger"';
                                                         }
                                                         ?>>
                                                             {{ $item->status }}</div>

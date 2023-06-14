@@ -11,9 +11,8 @@ class TrackingController extends Controller
 {
     public function index()
     {
-        $optiondate = Session::get('optiondate');
-        $optionname = Session::get('optionname');
-        if ($optiondate == null && $optionname == null) {
+        $optionrequester = Session::get('optionrequester');
+        if ($optionrequester == null) {
             $data = DB::table('CLICKUP_DATA as C')
                 ->select('C.TASK_ID', 'C.TASK_NAME', 'C.COMPLETION', 'C.STATUS', 'C.END_DATE', 'C.TEAM', 'C.BU', 'C.TYPE', 'CREATE_DATE', 'PIC_CIT')
                 ->where('C.CREATE_DATE', function ($query) {
@@ -24,23 +23,10 @@ class TrackingController extends Controller
                 })
                 ->get();
         }
-        if ($optiondate != null) {
+        if ($optionrequester != null) {
             $data = DB::table('CLICKUP_DATA as C')
                 ->select('C.TASK_ID', 'C.TASK_NAME', 'C.COMPLETION', 'C.STATUS', 'C.END_DATE', 'C.TEAM', 'C.BU', 'C.TYPE', 'CREATE_DATE', 'PIC_CIT')
-                ->where('C.CREATE_DATE', '=', $optiondate)
-                ->where('C.CREATE_DATE', function ($query) {
-                    $query
-                        ->select(DB::raw('MAX(CREATE_DATE)'))
-                        ->from('CLICKUP_DATA')
-                        ->whereRaw('C.TASK_ID = TASK_ID');
-                })
-                ->get();
-            // var_dump($data);
-        }
-        if ($optionname != null) {
-            $data = DB::table('CLICKUP_DATA as C')
-                ->select('C.TASK_ID', 'C.TASK_NAME', 'C.COMPLETION', 'C.STATUS', 'C.END_DATE', 'C.TEAM', 'C.BU', 'C.TYPE', 'CREATE_DATE', 'PIC_CIT')
-                ->where('C.PIC_CIT', '=', $optionname)
+                ->where('C.requester', '=', $optionrequester)
                 ->where('C.CREATE_DATE', function ($query) {
                     $query
                         ->select(DB::raw('MAX(CREATE_DATE)'))
@@ -65,36 +51,20 @@ class TrackingController extends Controller
             }
         }
 
-        //-----get all data----
-        // $data = DB::table('CLICKUP_DATA')
-        // ->select('TASK_ID', 'TASK_NAME','COMPLETION','STATUS','END_DATE','TEAM','BU','TYPE')
-        // ->get();
-        // var_dump($data);
-        $data = $data->toArray();
-        // dd($data);
-        $CreateDates = DB::table('CLICKUP_DATA')
-            ->select('CREATE_DATE')
-            ->distinct()
-            ->get();
-        $CreateDates = $CreateDates->toArray();
+        $Createrequester = DB::table('CLICKUP_DATA')
+        ->select('REQUESTER')
+        ->distinct()
+        ->whereNotNull('REQUESTER')
+        ->get();
+        $Createrequester = $Createrequester->toArray();
 
-        $piccits = DB::table('CLICKUP_DATA')
-            ->select('PIC_CIT')
-            ->distinct()
-            ->whereNotNull('PIC_CIT')
-            ->get();
-        $piccits = $piccits->toArray();
-        // var_dump($piccits);
-        return view('cs_tracking', compact('data', 'statusCounts', 'CreateDates', 'piccits'));
+        return view('cs_tracking', compact('data', 'statusCounts', 'Createrequester'));
         // return view('cs_tracking')->with('data',$data);
     }
     public function option(Request $request)
     {
-        $optiondate = $request->optiondate;
-        $optionname = $request->optionname;
-        Session::put('optiondate', $optiondate);
-        Session::put('optionname', $optionname);
-        var_dump($optiondate);
+        $optionrequester = $request->optionrequester;
+        Session::put('optionrequester', $optionrequester);
         return redirect('/cs_tracking');
     }
 }
