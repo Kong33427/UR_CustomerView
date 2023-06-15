@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class loginController extends Controller
 {
@@ -16,6 +17,8 @@ class loginController extends Controller
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             $request->session()->regenerate();
             var_dump(Auth::user()->username);
+            $optiontype = ['3. UR', '1. Main Project'];
+            Session::put('optiontype', $optiontype);
             return redirect()->intended('/main_user');
         }
 

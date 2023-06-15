@@ -212,18 +212,19 @@
                                 <li class="breadcrumb-item active">Tracking</li>
                             </ol>
                         </div>
-                        <label>Requester</label>
-                    <div class="row mb-2">
-                        <div class="row mb-2" style="margin-top: 5px">
-                            <div class="col-sm-5">
-                                @php
-                                    $optionrequester = session('optionrequester');
-                                @endphp
-                                <form id="myForm" action="/main_user_option" method="POST">
-                                    @csrf
-                                    <select id="option" class="custom-select" name="optionrequester"
-                                        onchange="submitForm()">
-                                        <option value="">newest</option>
+                    </div>
+                    <label>Requester</label>
+                        <div>
+                            @php
+                                $optionrequester = session('optionrequester');
+                            @endphp
+                            <form id="myForm" action="/cs_tracking_option" method="POST">
+                                @csrf
+                                <div>
+                                    <div class="row" style="justify-content: left;">
+                                        <div class="col-3">
+                                    <select id="option" class="custom-select" name="optionrequester">
+                                        <option value=''>all user</option>
                                         @foreach ($Createrequester as $Createrequester)
                                             <option value="{{ $Createrequester->requester }}"
                                                 {{ $Createrequester->requester == $optionrequester ? 'selected' : '' }}>
@@ -231,12 +232,39 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                </form>
+                                </div>
+
+                                    @php
+                                        $optiontype = session('optiontype');
+                                        if ($optiontype === null) {
+                                            $optiontype = [0];
+                                        }
+                                    @endphp
+                                    <div class="col-2">
+                                        <label class="form-check">Project
+                                            <input type="checkbox" name="optiontype[]"
+                                                value="1. Main Project"{{ implode($optiontype) == '1. Main Project' || implode($optiontype) == '1. Main Project3. UR' ? 'checked' : '' }}>
+                                            <span class="form-check-input"></span>
+                                        </label>
+                                    </div>
+
+                                    <div class="col-2">
+                                        <label class="checkbox-container">UR
+                                            <input type="checkbox" name="optiontype[]"
+                                                value='3. UR'{{ implode($optiontype) == '3. UR' || implode($optiontype) == '1. Main Project3. UR' ? 'checked' : '' }}>
+                                            <span class="form-check-input"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-1">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
                             </div>
+                            </form>
                         </div>
-                    </div>
-                    </div>
-                </div><!-- /.container-fluid -->
+
+                
+                    </div><!-- /.container-fluid -->
             </section>
 
             <!-- Main content -->
